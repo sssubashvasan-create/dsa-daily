@@ -1,1 +1,48 @@
+Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
 
+Example 1:
+
+Input: nums = [1, 2, 3, 3]
+
+Output: true
+
+Example 2:
+
+Input: nums = [1, 2, 3, 4]
+
+Output: false
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+My Solution -> Using for loop and Set.
+
+class Solution {
+    public boolean hasDuplicate(int[] nums) {
+        Set<Integer> numSet = new HashSet<Integer>();
+
+        for(int num : nums){
+            if(numSet.contains(num)){
+                return true;
+            }
+            numSet.add(num);
+        }
+        return false;
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Alternate solution -> Using Java Streams.
+
+class Solution {
+    public boolean hasDuplicate(int[] nums) {
+        Set<Integer> numSet = Arrays.stream(nums)
+                                    .boxed()  //Converts int to Integer
+                                    .collect(Collectors.toSet()); //Collect the resultant int -> Integer converted value in a Set.
+        
+        if(numSet.size() < nums.length){
+            return true;
+        }
+        return false;
+    }
+}
