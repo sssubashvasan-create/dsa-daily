@@ -1,1 +1,88 @@
+Given an integer array nums, return an array output where output[i] is the product of all the elements of nums except nums[i].
 
+Each product is guaranteed to fit in a 32-bit integer.
+
+Follow-up: Could you solve it in O(n)
+O(n) time without using the division operation?
+
+Example 1:
+
+Input: nums = [1,2,4,6]
+
+Output: [48,24,12,8]
+Example 2:
+
+Input: nums = [-1,0,1,2,3]
+
+Output: [0,-6,0,0,0]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+My Solution - O(n) timecomplexity using division operation.
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+
+
+        int product = 1, zeroCount = 0;
+
+        for(int num : nums){
+            if(num == 0 && zeroCount < 1){
+                ++zeroCount;
+            }
+            else if(num != 0){
+                product = product * num;
+            }
+            else{
+                return new int[nums.length];
+            }
+        }
+
+        for(int i = 0; i < nums.length; i++){
+            if(zeroCount > 0){
+                if(nums[i] == 0){
+                    nums[i] = product;
+                }
+                else{
+                    nums[i] = 0;
+                }
+            }
+            else{
+                nums[i] = product / nums[i];
+            }
+        }
+
+        return nums;
+        
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Without using division operation.
+
+for the "i" th element of an array calculate the prefix product (without the ith element) and the suffix product (without the ith element).
+
+then multiply both the prefix and suffix prods.
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+
+        // Step 1: Prefix products
+        result[0] = 1;
+        for (int i = 1; i < n; i++) {
+            result[i] = result[i - 1] * nums[i - 1];
+        }
+
+        // Step 2: Suffix products
+        int suffix = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] = result[i] * suffix;
+            suffix *= nums[i];
+        }
+
+        return result;
+    }
+}
