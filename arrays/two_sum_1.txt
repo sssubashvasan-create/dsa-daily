@@ -1,2 +1,56 @@
 // Two Sum Problem.
+Given an array of integers nums and an integer target, return the indices i and j such that nums[i] + nums[j] == target and i != j.
+
+You may assume that every input has exactly one pair of indices i and j that satisfy the condition.
+
+Return the answer with the smaller index first.
+
+Example 1:
+
+Input: 
+nums = [3,4,5,6], target = 7
+
+Output: [0,1]
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+My Solution:: Solved the problem using ArrayList or List.
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> resMap = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++){
+            int diff = target - nums[i];
+            if(resMap.containsKey(nums[i])){
+                return new int[]{resMap.get(nums[i]), i};
+            }
+            resMap.put(diff, i);
+        }
+
+        return new int[]{};
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+But if the problem is asked to be solved using HashMap (ChatGPT Asked to solve this using HashMap.
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> resMap = new HashMap<>();
+
+        for(int i = 0; i < nums.length; i++){
+            int diff = target - nums[i];
+            if(resMap.containsKey(nums[i])){
+                return new int[]{resMap.get(nums[i]), i};
+            }
+            resMap.put(diff, i);
+        }
+
+        return new int[]{};
+    }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
