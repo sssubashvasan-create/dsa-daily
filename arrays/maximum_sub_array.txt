@@ -1,1 +1,45 @@
+Given an array of integers nums, find the subarray with the largest sum and return the sum.
 
+A subarray is a contiguous non-empty sequence of elements within an array.
+
+Example 1:
+
+Input: nums = [2,-3,4,-2,2,1,-1,4]
+
+Output: 8
+Explanation: The subarray [4,-2,2,1,-1,4] has the largest sum 8.
+
+Example 2:
+
+Input: nums = [-1]
+
+Output: -1
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solution -> Using Kadanes Algorithm.
+
+Core Logic -> whether to continue with the previous array elements or to start a new array to find the maximum sub array sum.
+Whether to stick with the previous element while iterating the array to find the maximum sum.
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int maxSum =  nums[0];
+        int curSum = 0;
+
+        for(int num : nums){
+            curSum += num;
+
+            if(curSum < num){
+                curSum = num;
+            }
+
+            if(maxSum < curSum){
+                maxSum = curSum;
+            }
+        }
+
+        return maxSum;
+
+    }
+}
